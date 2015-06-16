@@ -1,6 +1,6 @@
 # pebble-chronocode
 
-**NOTE:** Requires Pebble Firmware v2.0 or greater.
+**NOTE:** Requires Pebble Firmware v3.0 or greater. Built for the Pebble Time.
 
 ## Description
 
@@ -31,16 +31,16 @@ The current time is displayed (to the most recent five-minute interval) in sente
 
 ### Options
 
-* All Caps
+* __All Caps__
     Toggles "ALL CAPS" mode in which all letters are displayed in their capitalized (upper-case) state.
 
-* Inverted
+* __Inverted__
     Toggles inverted mode in which the colors of the display are inverted, i.e. black becomes white and white becomes black.
 
-* ±2 Minute Dots
+* __±2 Minute Dots__
     Toggles "±2 minute dots" mode in which the watch changes behavior to display the nearest five-minute interval as opposed to the most recent five-minute interval. For example, 4:02 would still be displayed as "It is two o'clock," but 4:03 would be displayed as "It is five past two" as 4:03 is nearer to 4:05 than 4:00. In this mode, the four dots shown in the corners of the screen represent -1 (top-left), -2 (top-right), +1 (bottom-left), and +2 (bottom-right) minutes before or after the current five-minute interval. The earlier example of 4:02 would have the bottom-right dot displayed, while 4:03 would have the top-right dot displayed. This mode is a bit confusing at first if the user is accustomed to the "normal" display, but it is actually a more accurate display of the current time.
 
-* Language
+* __Language__
     One of eight languages can be chosen for the watchface display. Available languages include:
       - English (en_US)
       - Belgisch-Nederlands (nl_BE)
@@ -53,24 +53,12 @@ The current time is displayed (to the most recent five-minute interval) in sente
       - Português (pt_PT)
       - Svenska (sv_SE)
 
+* __Theme__
+    Choose your theme color between Blue / Green / Red. See the screenshots above for more information.
 
 ## Build
 
-To build this watchface from source. Follow these steps:
-
-1. Clone this repository in an appropriate directory. For example:
-
-    `$ git clone https://github.com/rexmac/pebble-chronocode.git`
-
-2. Build the project:
-
-    `$ pebble build`
-
-3. Install the compiled project to your Pebble:
-
-    `$ pebble install --phone [your_phone_ip_here]`
-
-For more information on building and installing Pebble apps from source, please see the official [Getting Started](https://developer.getpebble.com/2/getting-started/) guide.
+To build this watchface from source, please see the official [Getting Started](https://developer.getpebble.com/2/getting-started/) guide.
 
 ## Adding new translations
 
