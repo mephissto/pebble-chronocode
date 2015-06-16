@@ -14,16 +14,16 @@ The app is configurable via the Pebble smartphone app. See Options section below
 
 Example watchfaces in various states:
 
-[![Screenshot showing normal, "first run" state (time is 5:50)](https://s3.amazonaws.com/pebble.rexmac.com/chronocode/screenshot1.png)](https://s3.amazonaws.com/pebble.rexmac.com/chronocode/screenshot1.png)&nbsp;
-[![Screenshot showing German language, inverted colors (time is 11:10)](https://s3.amazonaws.com/pebble.rexmac.com/chronocode/screenshot2.png)](https://s3.amazonaws.com/pebble.rexmac.com/chronocode/screenshot2.png)&nbsp;
-[![Screenshot showing Swedish language, normal colors (time is 4:45)](https://s3.amazonaws.com/pebble.rexmac.com/chronocode/screenshot3.png)](https://s3.amazonaws.com/pebble.rexmac.com/chronocode/screenshot3.png)&nbsp;
-[![Screenshot showing Spanish language, inverted colors (time is 4:45)](https://s3.amazonaws.com/pebble.rexmac.com/chronocode/screenshot4.png)](https://s3.amazonaws.com/pebble.rexmac.com/chronocode/screenshot4.png)
+![](screenshots/basalt-1.png)&nbsp;
+![](screenshots/basalt-2.png)&nbsp;
+![](screenshots/basalt-4.png)&nbsp;
+![](screenshots/basalt-5.png)
 
-### [Download](http://github.com/rexmac/pebble-chronocode/releases)
+### [Download](http://apps.getpebble.com/en_US/application/5580297bda86937b5c00001c)
 
 ## Install
 
-To install this watchface onto your Pebble device using your phone's browser, go to the [downloads page](http://github.com/rexmac/pebble-chronocode/releases) and click the green `pebble-chronocode.pbw` button. Your phone should download and automatically install the file into your phone's Pebble app (or it may prompt you for which app to use to open the file, in which case you should select the Pebble app). You can then use the Pebble app on your phone to install the watchface to your Pebble watch.
+To install this watchface onto your Pebble device using your phone's browser, go to the [downloads page](http://apps.getpebble.com/en_US/application/5580297bda86937b5c00001c).
 
 ## Use
 
