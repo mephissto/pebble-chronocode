@@ -105,6 +105,9 @@ static void toggle_word(int which, int on) {
 
   text_layer_set_text(text_layers[which], on ? w->text_on : ((settings & SETTING_ALL_CAPS) > 0 ? w->text_on : w->text_off));
   text_layer_set_font(text_layers[which], on ? font_on : font_off);
+#ifdef PBL_COLOR
+  text_layer_set_text_color(text_layers[which], on ? GColorWhite : GColorCeleste);
+#endif
 }
 
 /**
@@ -244,8 +247,13 @@ static void handle_minute_tick(struct tm *tick_time, TimeUnits units_changed) {
 static void minute_layer_update_callback(Layer * const me, GContext * ctx) {
   if (minute_num == 0) return; // Nothing to draw
 
+#ifdef PBL_COLOR
+  graphics_context_set_stroke_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorVividCerulean  : GColorWhite);
+  graphics_context_set_fill_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorVividCerulean  : GColorWhite);
+#else
   graphics_context_set_stroke_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorBlack : GColorWhite);
   graphics_context_set_fill_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorBlack : GColorWhite);
+#endif
 
   if ((settings & SETTING_TWO_MIN_DOTS) > 0) {
     const uint16_t r = 1; // Radius of dot to be drawn
@@ -288,7 +296,11 @@ static void word_layer_init(int which) {
   );
 
   text_layers[which] = text_layer_create(frame);
+#ifdef PBL_COLOR
+  text_layer_set_text_color(text_layers[which], (settings & SETTING_INVERTED) > 0 ? GColorVividCerulean : GColorCeleste);
+#else
   text_layer_set_text_color(text_layers[which], (settings & SETTING_INVERTED) > 0 ? GColorBlack : GColorWhite);
+#endif
   text_layer_set_background_color(text_layers[which], GColorClear);
   text_layer_set_font(text_layers[which], font_off);
   Layer *window_layer = window_get_root_layer(window);
@@ -311,7 +323,11 @@ static void clear_watchface() {
   layer_destroy(minute_layer);
 
   // Set background color
+#ifdef PBL_COLOR
+  window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorVividCerulean);
+#else
   window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorBlack);
+#endif
 
   // Create new text layers
   for (unsigned i = 0; i < word_count; i++) {
@@ -471,7 +487,11 @@ static void init(void) {
 
   // Initialize window
   window = window_create();
+#ifdef PBL_COLOR
+  window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorVividCerulean);
+#else
   window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorBlack);
+#endif
   window_set_window_handlers(window, (WindowHandlers) {
     .load = window_load,
     .unload = window_unload

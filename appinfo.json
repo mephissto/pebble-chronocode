@@ -1,78 +1,100 @@
 {
-  "uuid": "eefe2db3-3ca8-44c2-bc1c-f3e9e5e4ba1f",
-  "shortName": "ChronoCode",
-  "longName": "ChronoCode",
-  "companyName": "Rex McConnell (rex@rexmac.com)",
-  "versionCode": 14,
-  "versionLabel": "2.2.4",
-  "watchapp": {
-    "watchface": true
-  },
-  "capabilities": ["configurable"],
-  "appKeys": {
-    "allCaps": 0,
-    "inverted": 1,
-    "language": 2,
-    "twoMinDots": 3
-  },
-  "resources": {
-    "media": [{
-      "menuIcon": true,
-      "type": "png",
-      "name": "IMAGE_MENU_ICON",
-      "file": "images/menu_icon.png"
-    },{
-      "type": "font",
-      "name": "FONT_SOURCECODEPRO_BLACK_20",
-      "file": "fonts/SourceCodePro-Black.otf"
-    },{
-      "type": "font",
-      "name": "FONT_SOURCECODEPRO_LIGHT_20",
-      "file": "fonts/SourceCodePro-Light.otf"
-    },{
-      "type": "raw",
-      "name": "CHRONOCODE_DA_DK",
-      "file": "l10n/chronocode.da_DK.cclp"
-    },{
-      "type": "raw",
-      "name": "CHRONOCODE_DE_DE",
-      "file": "l10n/chronocode.de_DE.cclp"
-    },{
-      "type": "raw",
-      "name": "CHRONOCODE_EN_US",
-      "file": "l10n/chronocode.en_US.cclp"
-    },{
-      "type": "raw",
-      "name": "CHRONOCODE_ES_ES",
-      "file": "l10n/chronocode.es_ES.cclp"
-    },{
-      "type": "raw",
-      "name": "CHRONOCODE_FR_FR",
-      "file": "l10n/chronocode.fr_FR.cclp"
-    },{
-      "type": "raw",
-      "name": "CHRONOCODE_IT_IT",
-      "file": "l10n/chronocode.it_IT.cclp"
-    },{
-      "type": "raw",
-      "name": "CHRONOCODE_NB_NO",
-      "file": "l10n/chronocode.nb_NO.cclp"
-    },{
-      "type": "raw",
-      "name": "CHRONOCODE_NL_BE",
-      "file": "l10n/chronocode.nl_BE.cclp"
-    },{
-      "type": "raw",
-      "name": "CHRONOCODE_NL_NL",
-      "file": "l10n/chronocode.nl_NL.cclp"
-    },{
-      "type": "raw",
-      "name": "CHRONOCODE_PT_PT",
-      "file": "l10n/chronocode.pt_PT.cclp"
-    },{
-      "type": "raw",
-      "name": "CHRONOCODE_SV_SE",
-      "file": "l10n/chronocode.sv_SE.cclp"
-    }]
-  }
+    "appKeys": {
+        "allCaps": 0,
+        "inverted": 1,
+        "language": 2,
+        "twoMinDots": 3
+    },
+    "capabilities": [
+        "configurable"
+    ],
+    "companyName": "mephissto",
+    "longName": "ChronoCode color",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "data/chronocode.sv_SE.cclp",
+                "name": "CHRONOCODE_SV_SE",
+                "type": "raw"
+            },
+            {
+                "file": "data/chronocode.pt_PT.cclp",
+                "name": "CHRONOCODE_PT_PT",
+                "type": "raw"
+            },
+            {
+                "file": "data/chronocode.nl_NL.cclp",
+                "name": "CHRONOCODE_NL_NL",
+                "type": "raw"
+            },
+            {
+                "file": "data/chronocode.nl_BE.cclp",
+                "name": "CHRONOCODE_NL_BE",
+                "type": "raw"
+            },
+            {
+                "file": "data/chronocode.nb_NO.cclp",
+                "name": "CHRONOCODE_NB_NO",
+                "type": "raw"
+            },
+            {
+                "file": "data/chronocode.it_IT.cclp",
+                "name": "CHRONOCODE_IT_IT",
+                "type": "raw"
+            },
+            {
+                "file": "data/chronocode.fr_FR.cclp",
+                "name": "CHRONOCODE_FR_FR",
+                "type": "raw"
+            },
+            {
+                "file": "data/chronocode.es_ES.cclp",
+                "name": "CHRONOCODE_ES_ES",
+                "type": "raw"
+            },
+            {
+                "file": "data/chronocode.en_US.cclp",
+                "name": "CHRONOCODE_EN_US",
+                "type": "raw"
+            },
+            {
+                "file": "data/chronocode.de_DE.cclp",
+                "name": "CHRONOCODE_DE_DE",
+                "type": "raw"
+            },
+            {
+                "file": "data/chronocode.da_DK.cclp",
+                "name": "CHRONOCODE_DA_DK",
+                "type": "raw"
+            },
+            {
+                "file": "fonts/SourceCodePro-Light.otf",
+                "name": "FONT_SOURCECODEPRO_LIGHT_20",
+                "type": "font"
+            },
+            {
+                "file": "fonts/SourceCodePro-Black.otf",
+                "name": "FONT_SOURCECODEPRO_BLACK_20",
+                "type": "font"
+            },
+            {
+                "file": "images/menu_icon.png",
+                "menuIcon": true,
+                "name": "IMAGE_MENU_ICON",
+                "type": "png"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "ChronoCode color",
+    "targetPlatforms": [
+        "aplite",
+        "basalt"
+    ],
+    "uuid": "766b94c1-e721-4f38-ba42-f1ada0ea300e",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
 }
