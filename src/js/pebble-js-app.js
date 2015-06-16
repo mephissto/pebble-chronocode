@@ -14,12 +14,15 @@
     if(!settings) {
       settings = "{}";
     }
-    Pebble.openURL("https://s3.amazonaws.com/pebble.rexmac.com/chronocode/settings-2.2.4.html#" + encodeURIComponent(JSON.stringify(settings)));
+    Pebble.openURL("http://mephissto.github.io/chronocode-settings.html#" + encodeURIComponent(JSON.stringify(settings)));
   });
 
   Pebble.addEventListener("webviewclosed", function(e) {
     var rt = typeof e.response,
         options = (rt === "undefined" ? {} : JSON.parse(decodeURIComponent(e.response)));
+    
+    //console.log('____________________ OPTIONS RETURNED : ' + JSON.stringify(options));
+    
     if(Object.keys(options).length > 0) {
       window.localStorage.setItem("chronocode-settings", JSON.stringify(options));
       Pebble.sendAppMessage(options);

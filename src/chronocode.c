@@ -28,6 +28,7 @@ enum {
   SETTING_SYNC_KEY_INVERTED     = 1,
   SETTING_SYNC_KEY_LANGUAGE     = 2,
   SETTING_SYNC_KEY_TWO_MIN_DOTS = 3,
+  SETTING_SYNC_KEY_THEME        = 4,
 };
 
 // Language IDs
@@ -43,6 +44,13 @@ enum language_id {
   LANG_NL_BE = 8,
   LANG_PT_PT = 9,
   LANG_NB_NO = 10
+};
+
+// Theme IDs
+enum theme_id {
+  THEME_BLUE  = 0,
+  THEME_GREEN = 1,
+  THEME_RED   = 2
 };
 
 /**
@@ -61,11 +69,12 @@ static TextLayer *text_layers[54]; /**< Array of text layers for displaying the 
 static GFont font_on;  /**< The font used for words that are inactive or "off" */
 static GFont font_off; /**< The font used for words that are active or "on" */
 static AppSync settings_sync; /**< Keeps settings in sync between phone and watch */
-static uint8_t settings_sync_buffer[54]; /**< Buffer used by settings sync */
+static uint8_t settings_sync_buffer[68]; /**< Buffer used by settings sync */
 static Layer *minute_layer; /**< The layer onto which is drawn the box/dot representing the minute_num */
 static int minute_num; /**< The number of minutes (1-4) since the last five minute interval */
 static uint8_t settings; /**< Current settings (as bit flags) */
 static uint8_t language_setting;
+static uint8_t theme_setting;
 static const uint8_t word_count = 54;
 
 /**
@@ -106,7 +115,15 @@ static void toggle_word(int which, int on) {
   text_layer_set_text(text_layers[which], on ? w->text_on : ((settings & SETTING_ALL_CAPS) > 0 ? w->text_on : w->text_off));
   text_layer_set_font(text_layers[which], on ? font_on : font_off);
 #ifdef PBL_COLOR
-  text_layer_set_text_color(text_layers[which], on ? ((settings & SETTING_INVERTED) > 0 ? GColorBlueMoon : GColorWhite) : GColorVividCerulean);
+  if (THEME_BLUE == theme_setting) {
+    text_layer_set_text_color(text_layers[which], on ? ((settings & SETTING_INVERTED) > 0 ? GColorBlueMoon : GColorWhite) : GColorVividCerulean);
+  }
+  if (THEME_GREEN == theme_setting) {
+    text_layer_set_text_color(text_layers[which], on ? ((settings & SETTING_INVERTED) > 0 ? GColorJaegerGreen : GColorWhite) : GColorGreen);
+  }
+  if (THEME_RED == theme_setting) {
+    text_layer_set_text_color(text_layers[which], on ? ((settings & SETTING_INVERTED) > 0 ? GColorRed : GColorWhite) : GColorMelon);
+  }
 #endif
 }
 
@@ -248,8 +265,18 @@ static void minute_layer_update_callback(Layer * const me, GContext * ctx) {
   if (minute_num == 0) return; // Nothing to draw
 
 #ifdef PBL_COLOR
-  graphics_context_set_stroke_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorBlueMoon  : GColorWhite);
-  graphics_context_set_fill_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorBlueMoon  : GColorWhite);
+  if (THEME_BLUE == theme_setting) {
+    graphics_context_set_stroke_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorBlueMoon  : GColorWhite);
+    graphics_context_set_fill_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorBlueMoon  : GColorWhite);
+  }
+  if (THEME_GREEN == theme_setting) {
+    graphics_context_set_stroke_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorJaegerGreen  : GColorWhite);
+    graphics_context_set_fill_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorJaegerGreen  : GColorWhite);
+  }
+  if (THEME_RED == theme_setting) {
+    graphics_context_set_stroke_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorRed  : GColorWhite);
+    graphics_context_set_fill_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorRed  : GColorWhite);
+  }
 #else
   graphics_context_set_stroke_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorBlack : GColorWhite);
   graphics_context_set_fill_color(ctx, (settings & SETTING_INVERTED) > 0 ? GColorBlack : GColorWhite);
@@ -297,7 +324,15 @@ static void word_layer_init(int which) {
 
   text_layers[which] = text_layer_create(frame);
 #ifdef PBL_COLOR
-  text_layer_set_text_color(text_layers[which], (settings & SETTING_INVERTED) > 0 ? GColorBlueMoon : GColorVividCerulean);
+  if (THEME_BLUE == theme_setting) {
+    text_layer_set_text_color(text_layers[which], (settings & SETTING_INVERTED) > 0 ? GColorBlueMoon : GColorVividCerulean);
+  }
+  if (THEME_GREEN == theme_setting) {
+    text_layer_set_text_color(text_layers[which], (settings & SETTING_INVERTED) > 0 ? GColorJaegerGreen : GColorGreen);
+  }
+  if (THEME_RED == theme_setting) {
+    text_layer_set_text_color(text_layers[which], (settings & SETTING_INVERTED) > 0 ? GColorRed : GColorMelon);
+  }
 #else
   text_layer_set_text_color(text_layers[which], (settings & SETTING_INVERTED) > 0 ? GColorBlack : GColorWhite);
 #endif
@@ -324,7 +359,15 @@ static void clear_watchface() {
 
   // Set background color
 #ifdef PBL_COLOR
-  window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorBlueMoon);
+  if (THEME_BLUE == theme_setting) {
+    window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorBlueMoon);
+  }
+  if (THEME_GREEN == theme_setting) {
+    window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorJaegerGreen);
+  }
+  if (THEME_RED == theme_setting) {
+    window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorRed);
+  }
 #else
   window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorBlack);
 #endif
@@ -391,7 +434,7 @@ static void load_language_from_resource_file() {
  * @see https://developer.getpebble.com/2/api-reference/group___app_sync.html#ga144a1a8d8050f8f279b11cfb5d526212
  */
 static void settings_sync_error_callback(DictionaryResult dict_error, AppMessageResult app_message_error, void *context) {
-  //APP_LOG(APP_LOG_LEVEL_DEBUG, "Settings Sync Error: %d", app_message_error);
+  //APP_LOG(APP_LOG_LEVEL_DEBUG, "____________________ Settings Sync Error: %d", app_message_error);
 }
 
 /**
@@ -402,8 +445,8 @@ static void settings_sync_error_callback(DictionaryResult dict_error, AppMessage
  * @see https://developer.getpebble.com/2/api-reference/group___app_sync.html#ga448af36883189f6345cc7d5cd8a3cc29
  */
 static void settings_sync_tuple_changed_callback(const uint32_t key, const Tuple* new_tuple, const Tuple* old_tuple, void* context) {
-  uint8_t new = 0;
-
+  uint8_t new = 0, theme = 0;
+  
   switch (key) {
     case SETTING_SYNC_KEY_ALL_CAPS:
       if (0 == ((uint8_t) new_tuple->value->uint8)) settings = settings & ~SETTING_ALL_CAPS;
@@ -422,6 +465,12 @@ static void settings_sync_tuple_changed_callback(const uint32_t key, const Tuple
       if(new != language_setting) {
         language_setting = new;
         load_language_from_resource_file();
+      }
+      break;
+    case SETTING_SYNC_KEY_THEME:
+      theme = (uint8_t) new_tuple->value->uint8;
+      if (theme != theme_setting) {
+        theme_setting = theme;
       }
       break;
   }
@@ -484,11 +533,20 @@ static void window_unload(Window *window) {
 static void init(void) {
   settings = 0;
   language_setting = LANG_EN_US;
+  theme_setting = THEME_BLUE;
 
   // Initialize window
   window = window_create();
 #ifdef PBL_COLOR
-  window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorBlueMoon);
+  if (THEME_BLUE == theme_setting) {
+    window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorBlueMoon);
+  }
+  if (THEME_GREEN == theme_setting) {
+    window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorJaegerGreen);
+  }
+  if (THEME_RED == theme_setting) {
+    window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorRed);
+  }
 #else
   window_set_background_color(window, (settings & SETTING_INVERTED) > 0 ? GColorWhite : GColorBlack);
 #endif
@@ -511,7 +569,8 @@ static void init(void) {
     TupletInteger(SETTING_SYNC_KEY_ALL_CAPS, 0),
     TupletInteger(SETTING_SYNC_KEY_INVERTED, 0),
     TupletInteger(SETTING_SYNC_KEY_LANGUAGE, LANG_EN_US),
-    TupletInteger(SETTING_SYNC_KEY_TWO_MIN_DOTS, 0)
+    TupletInteger(SETTING_SYNC_KEY_TWO_MIN_DOTS, 0),
+    TupletInteger(SETTING_SYNC_KEY_THEME, THEME_BLUE)
   };
   app_sync_init(&settings_sync, settings_sync_buffer, sizeof(settings_sync_buffer), initial_settings, ARRAY_LENGTH(initial_settings),
     settings_sync_tuple_changed_callback, settings_sync_error_callback, NULL

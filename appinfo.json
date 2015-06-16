@@ -3,6 +3,7 @@
         "allCaps": 0,
         "inverted": 1,
         "language": 2,
+        "theme": 4,
         "twoMinDots": 3
     },
     "capabilities": [
@@ -89,11 +90,10 @@
     "sdkVersion": "3",
     "shortName": "ChronoCode color",
     "targetPlatforms": [
-        "aplite",
         "basalt"
     ],
     "uuid": "766b94c1-e721-4f38-ba42-f1ada0ea300e",
-    "versionLabel": "1.0",
+    "versionLabel": "1.1",
     "watchapp": {
         "watchface": true
     }
